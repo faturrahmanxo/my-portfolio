@@ -8,8 +8,29 @@ export default function Cursor() {
   });
 
   const [hover, setHover] = useState(false);
+  const [hasMouse, setHasMouse] = useState(false);
 
+  // Cek apakah device menggunakan mouse
   useEffect(() => {
+    const media = window.matchMedia("(hover: hover) and (pointer: fine)");
+
+    setHasMouse(media.matches);
+
+    const handleChange = (e) => {
+      setHasMouse(e.matches);
+    };
+
+    media.addEventListener("change", handleChange);
+
+    return () => {
+      media.removeEventListener("change", handleChange);
+    };
+  }, []);
+
+  // Jangan jalankan efek jika bukan desktop/mouse
+  useEffect(() => {
+    if (!hasMouse) return;
+
     const move = (e) => {
       setMouse({
         x: e.clientX,
@@ -39,7 +60,10 @@ export default function Cursor() {
         el.removeEventListener("mouseleave", leave);
       });
     };
-  }, []);
+  }, [hasMouse]);
+
+  // Tidak render apa pun di HP / tablet touchscreen
+  if (!hasMouse) return null;
 
   return (
     <>
