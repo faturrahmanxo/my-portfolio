@@ -1,0 +1,223 @@
+@import "tailwindcss";
+
+@theme {
+  /* fonts */
+  --font-primary: "Plus Jakarta Sans", sans-serif;
+  --font-title: "Ubuntu", sans-serif;
+
+  /* Background */
+  --color-background: #070b14;
+  --color-foreground: #f8fafc;
+
+  /* Card */
+  --color-card: #101827;
+
+  /* Surface */
+  --color-surface: #151f32;
+
+  /* Primary */
+  --color-primary: #22d3ee;
+  --color-primary-foreground: #07121d;
+
+  /* Accent */
+  --color-accent: #8b5cf6;
+  --color-accent-foreground: #ffffff;
+
+  /* Secondary */
+  --color-secondary: #172336;
+  --color-secondary-foreground: #a5f3fc;
+
+  /* Muted */
+  --color-muted: #1b2a3c;
+  --color-muted-foreground: #94a3b8;
+
+  /* Border */
+  --color-border: #23344d;
+
+  /* Highlight */
+  --color-highlight: #38bdf8;
+
+  /* Radius */
+  --radius: 1rem;
+}
+
+html {
+  scroll-behavior: smooth;
+  cursor: none;
+}
+
+body,
+* {
+  cursor: none;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #060b14;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+
+  background: #22d3ee;
+
+  border: 2px solid #060b14;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  filter: brightness(1.2);
+}
+
+@layer components {
+  .section-title {
+    @apply text-3xl sm:text-4xl md:text-5xl font-bold text-center font-title;
+  }
+
+  .section-title-span {
+    @apply bg-linear-to-r from-blue-400 via-primary to-blue-400 bg-clip-text text-transparent;
+  }
+
+  .badge {
+    @apply flex flex-wrap items-center p-4 md:px-4 md:py-2 rounded-2xl;
+  }
+
+  .badge-span {
+    @apply text-xs font-medium text-gray-400;
+  }
+
+  .page-title {
+    @apply text-lg font-bold text-center font-title;
+  }
+}
+
+.swiper-wrapper {
+  transition-timing-function: linear !important;
+}
+
+@layer utilities {
+  .animate-in {
+    animation-fill-mode: both;
+  }
+
+  .slide-in-from-top {
+    animation-name: slideInFromTop;
+  }
+
+  .slide-in-from-bottom {
+    animation-name: slideInFromBottom;
+  }
+
+  .duration-200 {
+    animation-duration: 200ms;
+  }
+
+  .duration-300 {
+    animation-duration: 300ms;
+  }
+
+  .duration-700 {
+    animation-duration: 700ms;
+  }
+
+  .delay-100 {
+    animation-delay: 100ms;
+  }
+
+  .delay-200 {
+    animation-delay: 200ms;
+  }
+
+  .delay-300 {
+    animation-delay: 300ms;
+  }
+
+  .animate-marquee {
+    animation: marquee 8s linear infinite;
+  }
+
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+}
+
+@keyframes slideInFromBottom {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes slideInFromTop {
+  from {
+    opacity: 0;
+    transform: translateY(-1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-wave {
+  animation: wave 2s infinite;
+}
+
+@keyframes floatingImage {
+  0%,
+  100% {
+    transform: scale(1.08) translateY(0);
+  }
+
+  50% {
+    transform: scale(1.08) translateY(-6px);
+  }
+}
+
+.floating-image {
+  animation: floatingImage 4s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Custom Horizontal Scrollbar */
+
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(34, 211, 238, 0.5) transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  height: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 999px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    90deg,
+    rgba(34, 211, 238, 0.8),
+    rgba(59, 130, 246, 0.8)
+  );
+  border-radius: 999px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    90deg,
+    rgba(34, 211, 238, 1),
+    rgba(59, 130, 246, 1)
+  );
+}
