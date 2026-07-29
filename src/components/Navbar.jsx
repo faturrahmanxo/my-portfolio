@@ -6,12 +6,15 @@ import {
   User,
   BriefcaseBusiness,
   Mail,
+  Moon,
+  Globe,
 } from "lucide-react";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 
 import { NavLink } from "react-router-dom";
 
 import { motion, AnimatePresence } from "motion/react";
+import ThemeToggle from "./ThemeToggle";
 
 const NavLinks = [
   {
@@ -46,23 +49,19 @@ const NavLinks = [
   },
 ];
 
-export default function Navbar() {
+export default function Navbar({ theme, toggleTheme }) {
   const [MobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [indicator, setIndicator] = useState({
-    left: 0,
-    width: 0,
-    opacity: 0,
-  });
-
-  const menuRef = useRef(null);
 
   useEffect(() => {
-    function handleScroll() {
-      setIsScrolled(window.scrollY > 50);
-    }
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
 
     window.addEventListener("scroll", handleScroll);
+
+    // Cek posisi saat pertama kali render
+    handleScroll();
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -76,7 +75,7 @@ export default function Navbar() {
       transition-all duration-500 ease-in-out
       ${
         isScrolled
-          ? "md:max-w-7xl md:mx-auto md:mt-4 md:rounded-full bg-slate-950/50 backdrop-blur-md border border-primary/20 shadow-lg shadow-black/20"
+          ? "dark:bg-slate-950 bg-white border-b dark:border-muted-foreground/20 border-border/20 shadow-sm shadow-black/5"
           : "w-full bg-transparent border-transparent"
       }
     `}
@@ -90,46 +89,11 @@ export default function Navbar() {
           </NavLink>
 
           {/* Desktop Menu */}
-          <div
-            ref={menuRef}
-            className="hidden md:flex items-center gap-2 relative rounded-full p-1"
-          >
-            {/* Sliding Indicator */}
-            <motion.div
-              className="absolute top-1 bottom-1 rounded-full bg-slate-900"
-              animate={{
-                left: indicator.left,
-                width: indicator.width,
-                opacity: indicator.opacity,
-              }}
-              transition={{
-                type: "spring",
-                stiffness: 180,
-                damping: 28,
-                mass: 0.8,
-              }}
-            />
-
+          <div className="hidden md:flex items-center gap-2 relative rounded-full p-1">
             {NavLinks.map((nav) => (
               <NavLink key={nav.id} to={nav.to}>
                 {({ isActive }) => (
                   <div
-                    onMouseEnter={(e) => {
-                      const parent = menuRef.current.getBoundingClientRect();
-                      const target = e.currentTarget.getBoundingClientRect();
-
-                      setIndicator({
-                        left: target.left - parent.left,
-                        width: target.width,
-                        opacity: 1,
-                      });
-                    }}
-                    onMouseLeave={() =>
-                      setIndicator((prev) => ({
-                        ...prev,
-                        opacity: 0,
-                      }))
-                    }
                     className={`relative z-10 px-4 py-1 rounded-xl cursor-pointer transition-all duration-300 ${
                       isActive
                         ? "bg-linear-to-r from-blue-400 via-primary to-blue-400"
@@ -137,8 +101,10 @@ export default function Navbar() {
                     }`}
                   >
                     <span
-                      className={`transition-colors duration-300 ${
-                        isActive ? "text-white font-bold" : "text-gray-300"
+                      className={`transition-all duration-300 ${
+                        isActive
+                          ? "text-white font-bold"
+                          : "text-muted-foreground dark:hover:text-white hover:text-black"
                       }`}
                     >
                       {nav.label}
@@ -149,23 +115,28 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* humberger menu */}
-          <button
-            className="md:hidden p-2 text-primary cursor-pointer"
-            onClick={() => setMobileMenuOpen((prev) => !prev)}
-          >
-            {MobileMenuOpen ? (
-              <X className="w-5 h-5 sm:w-6 sm:h-6" />
-            ) : (
-              <Menu className="w-5 h-5 sm:w-6 sm:h-6" />
-            )}
-          </button>
+          <div className="flex items-center gap-3">
+            {/* Theme Toggle */}
+            <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
+
+            {/* Hamburger */}
+            <button
+              className="md:hidden flex items-center p-2 dark:text-white text-muted hover:text-primary transition-all duration-300 cursor-pointer"
+              onClick={() => setMobileMenuOpen((prev) => !prev)}
+            >
+              {MobileMenuOpen ? (
+                <X className="w-5 h-5 sm:w-6 sm:h-6" />
+              ) : (
+                <Menu className="w-5 h-5 sm:w-6 sm:h-6" />
+              )}
+            </button>
+          </div>
         </nav>
       </div>
 
       {/* Mobile Menu */}
       {MobileMenuOpen && (
-        <div className="md:hidden bg-slate-950 backdrop-blur-lg animate-in slide-in-from-top duration-300">
+        <div className="md:hidden dark:bg-slate-950 bg-white animate-in slide-in-from-top duration-300">
           <div className="grid grid-cols-2 px-5 py-5 gap-4">
             {NavLinks.map((nav) => (
               <NavLink
@@ -173,11 +144,11 @@ export default function Navbar() {
                 onClick={() => setMobileMenuOpen(false)}
                 className={({ isActive }) =>
                   `flex items-center gap-2 rounded-xl px-4 py-3
-                text-sm font-medium transition-all duration-300
+                text-sm font-medium transition-colors duration-300
                 ${
                   isActive
-                    ? "bg-cyan-500/10 border border-cyan-500/80 text-cyan-400"
-                    : "text-gray-300 hover:bg-cyan-800/20 hover:text-white"
+                    ? "bg-primary/10 border border-primary/80 text-primary"
+                    : "text-muted-foreground dark:hover:bg-primary/10 hover:text-muted dark:hover:text-white"
                 }`
                 }
               >

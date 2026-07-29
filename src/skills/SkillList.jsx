@@ -30,7 +30,8 @@ function SkillCard({ skill }) {
           h-26
           gap-2
           border
-          border-slate-700
+          dark:border-slate-700
+          border-border/30
           rounded-lg
           px-6
           py-5
@@ -42,7 +43,7 @@ function SkillCard({ skill }) {
       >
         <Icon icon={skill.icon} width={40} height={40} />
 
-        <span className="text-sm font-semibold text-muted-foreground group-hover:text-white">
+        <span className="text-sm font-semibold text-muted-foreground dark:group-hover:text-white group-hover:text-muted">
           {skill.name}
         </span>
       </div>
@@ -98,16 +99,12 @@ export default function SkillList() {
     <div className="mt-20" data-aos="fade-up" data-aos-duration="500">
       <div className="relative overflow-x-hidden overflow-y-visible py-4">
         {/* Fade kiri */}
-        <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-24 bg-linear-to-r from-slate-950/10 to-transparent z-20" />
+        <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-24 bg-linear-to-r dark:from-slate-950/10 from-white/10 to-transparent z-20" />
 
         {/* Fade kanan */}
-        <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-24 bg-linear-to-l from-slate-950/10 to-transparent z-20" />
+        <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-24 bg-linear-to-l dark:from-slate-950/10 from-white/10  to-transparent z-20" />
 
-        <div
-          onMouseEnter={() => (paused.current = true)}
-          onMouseLeave={() => (paused.current = false)}
-          className=""
-        >
+        <div className="">
           <div
             ref={trackRef}
             className="

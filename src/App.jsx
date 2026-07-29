@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -14,7 +14,8 @@ import ContactPage from "./pages/ContactPage";
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import Cursor from "./components/Cursor";
+import CursorGlow from "./components/CursorGlow";
+// import Cursor from "./components/Cursor";
 
 function AnimatedPage({ children }) {
   return (
@@ -43,14 +44,25 @@ function App() {
     });
   }, []);
 
+  const [theme, setTheme] = useState("light");
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === "light" ? "dark" : "light"));
+  };
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", theme === "dark");
+  }, [theme]);
+
   return (
-    <div className="min-h-screen bg-slate-950 text-white overflow-hidden">
-      <Cursor />
-      <Navbar />
+    <div className="min-h-screen overflow-hidden dark:bg-slate-950 bg-white">
+      {/* <Cursor /> */}
+      <CursorGlow />
+      <Navbar theme={theme} toggleTheme={toggleTheme} />
 
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<HomePage theme={theme} />} />
 
           <Route
             path="/about"

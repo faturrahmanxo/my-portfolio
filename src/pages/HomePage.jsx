@@ -23,17 +23,18 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { codeExamples, floatingCards } from "../data/CodeExamples";
-import { nightOwl } from "react-syntax-highlighter/dist/esm/styles/prism";
+import {
+  oneLight,
+  nightOwl,
+} from "react-syntax-highlighter/dist/esm/styles/prism";
 
 import SkillCard from "../skills/SkillCard";
 import SkillList from "../skills/SkillList";
 import SkillVer2 from "../skills/SkillVer2";
 import ProjectCard, { projects } from "../projects/ProjectCard";
-
-import Card from "../components/Card";
+import Button from "../components/Button";
 
 export default function HomePage() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [activeTab, setActiveTab] = useState("Profile.jsx");
   const [scrambleText, setScrambleText] = useState("");
   const [viewMode, setviewMode] = useState("card");
@@ -41,18 +42,6 @@ export default function HomePage() {
   const finalText = "Frontend Developer";
   const chars =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
-
-  useEffect(() => {
-    function handleMouseMove(e) {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    }
-
-    window.addEventListener("mousemove", handleMouseMove);
-
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-    };
-  }, []);
 
   useEffect(() => {
     let scrambleInterval;
@@ -100,30 +89,21 @@ export default function HomePage() {
     };
   }, []);
 
-  const currentFloatingCard = floatingCards[activeTab];
   return (
-    <div className="font-primary">
+    <div className="font-primary dark:bg-slate-950 bg-[#f9fafb]">
       {/* section 1 */}
       <section className="relative min-h-screen flex items-center justify-center pt-16 sm:pt-20 px-4 sm:px-16 lg:px-8 overflow-hidden">
         {/* Background Grid */}
-        <div
+        {/* <div
           className="absolute inset-0 z-0 pointer-events-none"
           style={{
             backgroundSize: "60px 50px",
             backgroundImage: `
-        linear-gradient(rgba(34,211,238,0.15) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(34,211,238,0.05) 1px, transparent 1px)
+        linear-gradient(rgba(34,211,238,0.2) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(34,211,238,0.2) 1px, transparent 1px)
       `,
           }}
-        />
-
-        {/* mouse efek blur */}
-        <div
-          className="absolute inset-0 opacity-30"
-          style={{
-            background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(59, 130, 246, 0.20), transparent 40%)`,
-          }}
-        />
+        /> */}
 
         {/* efek blur */}
         <div className="absolute top-20 left-4 sm:left-10 w-48 sm:w-72 h-48 sm:h-72 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
@@ -137,19 +117,19 @@ export default function HomePage() {
               <div className="relative inline-flex rounded-full p-[1.5px] overflow-hidden mb-6">
                 {/* Animated Border */}
                 <span className="absolute inset-0 animate-[spin_4s_linear_infinite] bg-[conic-gradient(from_0deg,transparent_0%,#00BFFF_15%,transparent_35%)]" />
-                <div className="relative inline-flex items-center gap-2 px-3 py-1.5 bg-[#060b14] border border-white/10 rounded-full">
+                <div className="relative inline-flex items-center gap-2 px-3 py-1.5 dark:bg-black bg-[#f6f7f8] border border-white/10 rounded-full">
                   <Sparkle className="w-3 h-3 text-primary" />
                   <span className="text-xs font-medium text-primary">
                     Open to Opportunities
                   </span>
                 </div>
               </div>
-              <p className="text-sm md:text-[16px] font-medium my-2">
-                Hii, my name is
+              <p className="text-sm md:text-[15px] font-bold tracking-wide mt-2 text-[#0e1525] dark:text-white">
+                Halo, my name is
               </p>
 
               <h1 className="text-4xl sm:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6 animate-in slide-in-from-bottom duration-700 delay-100 leading-tight">
-                <span className=" block bg-linear-to-r from-blue-400 via-primary to-blue-400 bg-clip-text text-transparent mb-1 sm:mb-2 font-title">
+                <span className=" block bg-linear-to-r from-blue-400 via-primary to-blue-800 bg-clip-text text-transparent mb-1 sm:mb-2 font-title">
                   Habib Iqbal Faturrahman
                 </span>
               </h1>
@@ -161,12 +141,12 @@ export default function HomePage() {
                   <span className="absolute inline-flex h-full w-full rounded-full bg-primary opacity-75 animate-ping"></span>
                   <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-primary"></span>
                 </span>
-                <span className="text-xs font-medium text-blue-300">
+                <span className="text-xs md:text-sm font-bold text-blue-300">
                   {scrambleText}
                 </span>
               </div>
 
-              <p className="text-sm sm:text-base md:text-lg leading-relaxed text-gray-400 max-w-2xl mx-auto lg:mx-0 mb-6 sm:mb-8 animate-in slide-in-from-bottom duration-700 delay-200">
+              <p className="text-sm sm:text-base md:text-lg leading-relaxed text-muted-foreground max-w-2xl mx-auto lg:mx-0 mb-6 sm:mb-8 animate-in slide-in-from-bottom duration-700 delay-200">
                 An Information Systems student with a strong passion and
                 interest in building accessible and responsive websites,
                 focusing on robust performance.
@@ -174,36 +154,38 @@ export default function HomePage() {
 
               {/* buttons */}
               <div className="flex flex-col flex-wrap sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4 mb-8 sm:mb-12 animate-in slide-in-from-bottom duration-700 delay-300">
-                <a
-                  href="/projects"
-                  className="group w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 whitespace-nowrap rounded-full hover:scale-103 hover:bg-primary/10 transition-all duration-300 flex items-center justify-center space-x-2 border border-primary"
+                <Button
+                  to="/projects"
+                  variant="gradient"
+                  className="group w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 whitespace-nowrap hover:scale-103 active:scale-95 transition-all duration-300 flex items-center justify-center space-x-2"
                 >
-                  <span className="tracking-widest font-medium text-sm group-hover:text-primary">
+                  <span className="font-bold text-sm text-white">
                     View My Work
                   </span>
-                  <ArrowRight className="w-4 h-4 group-hover:text-primary transition-transform duration-300 " />
-                </a>
+                  <ArrowRight className="w-4 h-4 text-white group-hover:-rotate-25 transition-transform duration-300 " />
+                </Button>
 
                 <div className="flex items-center w-full sm:w-auto gap-4 text-sm whitespace-nowrap">
-                  <a
+                  <Button
                     href="https://drive.google.com/file/d/1gWDDlzW0AZAl8RqqBe9FXeVxRmA810Id/view?usp=sharing"
                     target="_blank"
-                    className="group flex-1 sm:flex-initial px-6 py-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full transition-all duration-300 hover:border-primary hover:scale-103 flex items-center justify-center space-x-2"
+                    variant="secondary"
+                    className="group px-6 py-3 flex-1 sm:flex-initial hover:scale-103"
                   >
-                    <ArrowBigDownDash className="w-4 h-4 sm:w-5 sm:h-5" />
-                    <span className="font-medium text-sm group-hover:text-primary">
+                    <span className="font-semibold text-sm text-gray-600 dark:text-muted-foreground group-hover:text-primary">
                       Download CV
                     </span>
-                  </a>
+                  </Button>
 
-                  <a
-                    href="/contact"
-                    className="group flex-1 sm:flex-initial px-6 py-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full transition-all duration-300 hover:border-primary hover:scale-103 flex items-center justify-center space-x-2"
+                  <Button
+                    to="/contact"
+                    variant="secondary"
+                    className="group px-6 py-3 flex-1 sm:flex-initial hover:scale-103"
                   >
-                    <span className="font-medium text-sm group-hover:text-primary">
-                      Contact Me
+                    <span className="font-semibold text-sm text-gray-600 dark:text-muted-foreground group-hover:text-primary">
+                      Get In Touch
                     </span>
-                  </a>
+                  </Button>
                 </div>
               </div>
               {/* akhir buttons */}
@@ -215,7 +197,7 @@ export default function HomePage() {
               data-aos="zoom-in"
               data-aos-duration="1000"
             >
-              <div className="relative bg-white/5 backdrop-blur-xl rounded-xl sm:rounded-2xl p-3 sm:p-4 shadow-2xl border border-white/10">
+              <div className="relative dark:bg-white/5 bg-dark/10 backdrop-blur-xl rounded-xl sm:rounded-2xl p-3 sm:p-4 shadow-2xl border dark:border-white/10 border-gray-300">
                 <div className="bg-linear-to-br from-gray-900/20 to-gray-800/20 backdrop-blur-sm rounded-lg overflow-hidden h-[280px] sm:h-[350px] lg:h-[350px] border border-white/5">
                   {/* ide header */}
                   <div className="flex items-center justify-between px-3 sm:px-4 py-2 sm:py-3 bg-white/5 backdrop-blur-sm border-b border-white/10">
@@ -225,30 +207,19 @@ export default function HomePage() {
                         <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-yellow-500" />
                         <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-green-500" />
                       </div>
-                      <span className="text-xs sm:text-sm text-gray-300">
-                        Fatur.
-                      </span>
                     </div>
-                    <ChevronDown className="w-3 h-3 sm:w-4 sm:h-4 text-gray-400" />
+                    <ChevronDown className="w-3 h-3 sm:w-4 sm:h-4 text-muted-foreground" />
                   </div>
                   <div className="p-3 sm:p-4 relative h-full">
                     {/* file tabs */}
-                    <div className="flex space-x-1 sm:space-x-2 mb-3 sm:mb-4 overflow-x-auto">
-                      <button
-                        onClick={() => setActiveTab("Profile.jsx")}
-                        className={`px-3 py-2 backdrop-blur-sm text-xs sm:text-sm rounded-t-lg border ${
-                          activeTab === "Profile.jsx"
-                            ? "bg-blue-500/30 text-white border-blue-400/20"
-                            : "bg-white/5 text-gray-300 border-white/10 hover:bg-white/10"
-                        }  
-                      transition-all duration-200 whitespace-nowrap`}
-                      >
+                    <div className="flex space-x-1 sm:space-x-2 mb-3 overflow-x-auto">
+                      <button className="px-3 py-2 backdrop-blur-sm text-xs sm:text-sm font-semibold rounded-lg dark:bg-primary/30 bg-muted border border-foreground/40 dark:border-foreground/20 text-white transition-all duration-200 whitespace-nowrap">
                         Profile.jsx
                       </button>
                     </div>
 
                     {/* code content */}
-                    <div className="relative overflow-hidden flex-grow">
+                    <div className="relative overflow-hidden grow">
                       <SyntaxHighlighter
                         language="javascript"
                         style={nightOwl}
@@ -261,6 +232,7 @@ export default function HomePage() {
                           border: "1px solid #3c3c3c",
                           wordWrap: "break-word",
                           whitespace: "pre-wrap",
+                          backgroundColor: "#transparent",
                         }}
                       >
                         {codeExamples[activeTab]}
@@ -268,30 +240,6 @@ export default function HomePage() {
                     </div>
                   </div>
                 </div>
-
-                {/* floating card */}
-                {/* <div
-                  className={`hidden lg:block absolute bottom-4 right-4 transform translate-x-8 translate-y-8 w-72 ${currentFloatingCard.bgColor} backdrop-blur-xl rounded-lg p-4 border border-white/20 shadow-2xl`}
-                >
-                  <div className="flex items-center space-x-2 mb-2">
-                    <div
-                      className={`w-6 h-6 ${currentFloatingCard.iconColor} flex items-center justify-center text-sm font-bold`}
-                    >
-                      {currentFloatingCard.icon}
-                    </div>
-                    <span
-                      className={`text-sm font-medium ${currentFloatingCard.textColor}`}
-                    >
-                      {currentFloatingCard.title}
-                    </span>
-                  </div>
-
-                  <div
-                    className={`text-sm text-left ${currentFloatingCard.contentColor}`}
-                  >
-                    {currentFloatingCard.content}
-                  </div>
-                </div> */}
               </div>
             </div>
           </div>
@@ -302,12 +250,9 @@ export default function HomePage() {
           className="absolute bottom-8 left-1/2 -translate-x-1/2 
           animate-fade-in animation-delay-800"
         >
-          <a
-            href=""
-            className="flex flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors group"
-          >
+          <div className="flex flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors group">
             <ChevronDown className="w-6 h-6 animate-bounce" />
-          </a>
+          </div>
         </div>
       </section>
 
@@ -317,25 +262,25 @@ export default function HomePage() {
           <div className="mb-12" data-aos="fade-up" data-aos-duration="500">
             {/* title */}
             <h2 className="section-title">
-              Skill &<span className="section-title-span"> Technologies</span>
+              Skills &<span className="section-title-span"> Technologies</span>
             </h2>
-            <p className="text-gray-300 text-center mt-6">
+            <p className="text-muted-foreground text-center mt-6">
               How I turn complex problems into simple, elegant solutions.
             </p>
 
             {/* button skills */}
             <div className="flex flex-col items-center mt-10 gap-3">
-              <span className="text-xs uppercase tracking-[0.2em] text-gray-400">
+              <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
                 View Mode
               </span>
 
-              <div className="inline-flex items-center gap-1 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-1.5 shadow-lg shadow-black/20">
+              <div className="inline-flex items-center gap-1 rounded-2xl border dark:border-border/50 border-border/10 bg-white/5 backdrop-blur-xl p-1.5 shadow-sm">
                 <button
                   onClick={() => setviewMode("card")}
-                  className={`group flex items-center gap-2 rounded-xl px-4 py-2.5 transition-all duration-300 ${
+                  className={`group flex items-center text-muted-foreground gap-2 rounded-xl px-4 py-2.5 transition-all duration-300 ${
                     viewMode === "card"
                       ? "bg-linear-to-r from-blue-400 via-primary to-blue-400 text-white"
-                      : "text-white/60 hover:bg-white/5 hover:text-white"
+                      : " hover:bg-white/5 "
                   }`}
                 >
                   <LayoutGrid className="w-4 h-4" />
@@ -346,10 +291,10 @@ export default function HomePage() {
 
                 <button
                   onClick={() => setviewMode("list")}
-                  className={`group flex items-center gap-2 rounded-xl px-4 py-2.5 transition-all duration-300 ${
+                  className={`group flex items-center text-muted-foreground gap-2 rounded-xl px-4 py-2.5 transition-all duration-300 ${
                     viewMode === "list"
-                      ? "bg-linear-to-r from-primary to-blue-500 text-white"
-                      : "text-white/60 hover:bg-white/5 hover:text-white"
+                      ? "bg-linear-to-r from-blue-400 via-primary to-blue-400 text-white"
+                      : "text-muted-foreground hover:bg-white/5 "
                   }`}
                 >
                   <LayoutList className="w-4 h-4" />
@@ -377,7 +322,7 @@ export default function HomePage() {
             {/* skills */}
             {viewMode === "card" && <SkillCard />}
             {viewMode === "list" && <SkillList />}
-            {viewMode === "ver2" && <SkillVer2 />}
+            {/* {viewMode === "ver2" && <SkillVer2 />} */}
           </div>
         </div>
       </section>
@@ -400,13 +345,13 @@ export default function HomePage() {
             </div>
             <div className="mt-3 w-25 h-1 mx-auto bg-linear-to-r from-blue-400 via-primary to-blue-400 rounded-full" />
 
-            <p className="text-gray-300 mt-6">
+            <p className="text-muted-foreground mt-6">
               Here are some of the technologies I've worked with
             </p>
           </div>
 
           <div className="relative grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
-            <div className="hidden md:block absolute top-12 left-0 bg-border/50 w-full h-0.5" />
+            <div className="hidden md:block absolute top-12 left-0 dark:bg-muted/50 bg-muted/20 w-full h-0.5" />
 
             {/* card 1 - Research */}
             <div
@@ -415,14 +360,16 @@ export default function HomePage() {
               data-aos-duration="800"
               data-aos-delay="100"
             >
-              <div className="absolute w-8 h-8 -top-3 -right-3 bg-primary/20 rounded-full border border-white/20 flex items-center justify-center text-sm font-bold text-gray-400 group-hover:border-white group-hover:text-white transition-colors duration-300 z-20">
+              <div className="absolute w-8 h-8 -top-3 -right-3 bg-primary/20 rounded-full border border-white/20 flex items-center justify-center text-sm font-bold text-muted-foreground dark:group-hover:border-white dark:group-hover:text-white group-hover:border-primary group-hover:text-primary transition-colors duration-300 z-20">
                 1
               </div>
               <div className="flex flex-col items-center justify-center w-24 h-24 rounded-2xl bg-linear-to-br from-primary to-blue-500 mb-6 z-10 shadow-lg  rotate-3 group-hover:rotate-10 transition-transform duration-300">
                 <Search className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-xl font-bold mb-3">Research</h3>
-              <p className="text-gray-400 text-xs leading-relaxed px-4">
+              <h3 className="text-xl font-bold mb-3 dark:text-white">
+                Research
+              </h3>
+              <p className="text-muted-foreground text-xs leading-relaxed px-4">
                 Learning about user needs, project objectives, and technical
                 requirements before development.
               </p>
@@ -435,14 +382,14 @@ export default function HomePage() {
               data-aos-duration="800"
               data-aos-delay="300"
             >
-              <div className="absolute w-8 h-8 -top-3 -right-3 bg-primary/20 rounded-full border border-white/20 flex items-center justify-center text-sm font-bold text-gray-400 group-hover:border-white group-hover:text-white transition-colors duration-300 z-20">
+              <div className="absolute w-8 h-8 -top-3 -right-3 bg-primary/20 rounded-full border border-white/20 flex items-center justify-center text-sm font-bold text-muted-foreground dark:group-hover:border-white dark:group-hover:text-white group-hover:border-primary group-hover:text-primary transition-colors duration-300 z-20">
                 2
               </div>
               <div className="flex flex-col items-center justify-center w-24 h-24 rounded-2xl  bg-gray-300 mb-6 z-10 shadow-lg  rotate-3 group-hover:rotate-10 transition-transform duration-300">
                 <Palette className="w-8 h-8 text-black" />
               </div>
-              <h3 className="text-xl font-bold mb-3">Design</h3>
-              <p className="text-gray-400 text-xs leading-relaxed px-4">
+              <h3 className="text-xl font-bold mb-3 dark:text-white">Design</h3>
+              <p className="text-muted-foreground text-xs leading-relaxed px-4">
                 Creating clean, modern, and user-friendly interfaces that
                 balance aesthetics and functionality.
               </p>
@@ -455,14 +402,16 @@ export default function HomePage() {
               data-aos-duration="800"
               data-aos-delay="500"
             >
-              <div className="absolute w-8 h-8 -top-3 -right-3 bg-primary/20 rounded-full border border-white/20 flex items-center justify-center text-sm font-bold text-gray-400 group-hover:border-white group-hover:text-white transition-colors duration-300 z-20">
+              <div className="absolute w-8 h-8 -top-3 -right-3 bg-primary/20 rounded-full border border-white/20 flex items-center justify-center text-sm font-bold text-muted-foreground dark:group-hover:border-white dark:group-hover:text-white group-hover:border-primary group-hover:text-primary transition-colors duration-300 z-20">
                 3
               </div>
               <div className="flex flex-col items-center justify-center w-24 h-24 rounded-2xl bg-primary mb-6 z-10 shadow-lg  rotate-3 group-hover:rotate-10 transition-transform duration-300">
                 <CodeXml className="w-8 h-8" />
               </div>
-              <h3 className="text-xl font-bold mb-3">Develop</h3>
-              <p className="text-gray-400 text-xs leading-relaxed px-4">
+              <h3 className="text-xl font-bold mb-3 dark:text-white">
+                Develop
+              </h3>
+              <p className="text-muted-foreground text-xs leading-relaxed px-4">
                 Turning designs into fast, responsive, and interactive web
                 applications with React and modern tools.
               </p>
@@ -475,14 +424,16 @@ export default function HomePage() {
               data-aos-duration="800"
               data-aos-delay="700"
             >
-              <div className="absolute w-8 h-8 -top-3 -right-3 bg-primary/20 rounded-full border border-white/20 flex items-center justify-center text-sm font-bold text-gray-400 group-hover:border-white group-hover:text-white transition-colors duration-300 z-20">
+              <div className="absolute w-8 h-8 -top-3 -right-3 bg-primary/20 rounded-full border border-white/20 flex items-center justify-center text-sm font-bold text-muted-foreground dark:group-hover:border-white dark:group-hover:text-white group-hover:border-primary group-hover:text-primary transition-colors duration-300 z-20">
                 4
               </div>
               <div className="flex flex-col items-center justify-center w-24 h-24 rounded-2xl bg-blue-500 mb-6 z-10 shadow-lg  rotate-3 group-hover:rotate-10 transition-transform duration-300">
                 <Bug className="w-8 h-8 text-highlight" />
               </div>
-              <h3 className="text-xl font-bold mb-3">Optimize</h3>
-              <p className="text-gray-400 text-xs leading-relaxed px-4">
+              <h3 className="text-xl font-bold mb-3 dark:text-white">
+                Optimize
+              </h3>
+              <p className="text-muted-foreground text-xs leading-relaxed px-4">
                 Enhancing performance, fixing issues, and refining the interface
                 for the best possible experience.
               </p>
@@ -503,7 +454,7 @@ export default function HomePage() {
               My
               <span className="section-title-span"> Projects</span>
             </h2>
-            <p className="text-gray-300 mt-6">
+            <p className="text-muted-foreground mt-6 ">
               Here are some of the technologies I've worked with
             </p>
           </div>
@@ -518,15 +469,15 @@ export default function HomePage() {
           <div className="mt-14 flex justify-center">
             <Link
               to="/projects"
-              className="group inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-8 py-3 transition-all duration-300 hover:border-primary hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-1"
+              className="group inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-8 py-3 transition-all duration-300 hover:border-primary hover:shadow-lg hover:shadow-primary/20 hover:-translate-y-1"
             >
-              <span className="tracking-wider uppercase text-[10px] font-medium">
-                See More Projects
+              <span className="tracking-wider uppercase text-[10px] font-bold text-muted-foreground dark:text-white">
+                View All Projects
               </span>
 
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-1"
+                className="h-3 w-3 text-muted-foreground dark:text-white transition-transform duration-300 group-hover:-rotate-25"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"

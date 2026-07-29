@@ -1,8 +1,12 @@
+import Card from "../components/Card";
 import ProjectCard, { projects } from "../projects/ProjectCard";
 
 export default function ProjectPage() {
   return (
-    <section id="projects" className="relative py-24 font-primary">
+    <section
+      id="projects"
+      className="relative py-24 font-primary dark:bg-slate-950 bg-white"
+    >
       <div className="max-w-6xl mx-auto px-5">
         <div className="mb-14">
           <h2 className="text-5xl font-bold font-title bg-linear-to-r from-blue-400 via-primary to-blue-400 bg-clip-text text-transparent ">
@@ -20,6 +24,11 @@ export default function ProjectPage() {
             <ProjectCard key={project.id} project={project} index={index} />
           ))}
         </div>
+        {/* <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <Card />
+          <Card />
+          <Card />
+        </div> */}
       </div>
     </section>
   );

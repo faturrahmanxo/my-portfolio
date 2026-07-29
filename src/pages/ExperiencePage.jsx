@@ -75,7 +75,7 @@ export default function ExperiencePage() {
   return (
     <section
       id="experience"
-      className="relative min-h-screen pt-30 pb-24 font-primary"
+      className="relative min-h-screen py-24 font-primary dark:bg-slate-950 bg-white"
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Title */}
@@ -83,10 +83,11 @@ export default function ExperiencePage() {
           <h3 className="text-4xl sm:text-5xl font-bold font-title flex items-center gap-3 bg-linear-to-r from-blue-400 via-primary to-blue-400 bg-clip-text text-transparent">
             Experience
           </h3>
-          <p className="text-sm font-medium  max-w-2xl text-gray-400 mt-5">
+          <p className="text-sm font-medium  max-w-2xl text-muted-foreground mt-5">
             I always want to seek out new experiences.
           </p>
         </div>
+
         {/* ================= Content ================= */}
         <div className="grid lg:grid-cols-[280px_1fr] gap-20 items-start">
           {/* ================= LEFT ================= */}
@@ -135,14 +136,14 @@ export default function ExperiencePage() {
               relative flex items-center gap-5
               rounded-2xl px-4 py-3
               transition-all duration-300
-              ${active ? "bg-white/5" : "hover:bg-white/5"}
+              ${active ? "bg-white/5" : "dark:hover:bg-white/5 hover:bg-foreground"}
             `}
                   >
                     {/* Active Glow */}
                     {active && (
                       <motion.div
                         layoutId="activeExperience"
-                        className="absolute inset-0 rounded-2xl border border-primary/20 bg-primary/5"
+                        className="absolute inset-0 rounded-2xl border dark:border-primary/20 border-primary/60 dark:bg-primary/5 bg-foreground"
                         transition={{
                           type: "spring",
                           stiffness: 350,
@@ -157,11 +158,7 @@ export default function ExperiencePage() {
                       relative z-10
                       text-lg font-semibold
                       transition-all duration-300
-                      ${
-                        active
-                          ? "text-white"
-                          : "text-gray-400 group-hover:text-white"
-                      }
+                      ${active ? "text-primary" : "text-muted-foreground"}
                     `}
                     >
                       {item.company}
@@ -180,21 +177,21 @@ export default function ExperiencePage() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -24 }}
               transition={{ duration: 0.4 }}
-              className="relative overflow-hidden rounded-2xl border border-white/10 bg-card/40 backdrop-blur-sm p-7 lg:p-8"
+              className="relative overflow-hidden rounded-2xl border dark:border-white/10 border-border/10 dark:bg-dark/40 bg-foreground backdrop-blur-sm p-7 lg:p-8"
             >
               {/* Decorative */}
               <div className="absolute inset-0 pointer-events-none">
                 {/* Horizontal */}
-                <div className="absolute top-20 left-0 h-px w-full bg-white/5" />
-                <div className="absolute top-44 left-0 h-px w-full bg-white/5" />
-                <div className="absolute bottom-20 left-0 h-px w-full bg-white/5" />
+                <div className="absolute top-20 left-0 h-px w-full dark:bg-white/5 bg-black/5" />
+                <div className="absolute top-44 left-0 h-px w-full dark:bg-white/5 bg-black/5" />
+                <div className="absolute bottom-20 left-0 h-px w-full dark:bg-white/5 bg-black/5" />
 
                 {/* Vertical */}
-                <div className="absolute left-28 top-0 h-full w-px bg-white/5" />
-                <div className="absolute right-24 top-0 h-full w-px bg-white/5" />
+                <div className="absolute left-28 top-0 h-full w-px dark:bg-white/5 bg-black/5" />
+                <div className="absolute right-24 top-0 h-full w-px dark:bg-white/5 bg-black/5" />
 
                 {/* Glow */}
-                <div className="absolute -right-16 -top-16 h-56 w-56 rounded-full bg-primary/10 blur-[100px]" />
+                <div className="absolute -right-16 -top-16 h-56 w-56 rounded-full dark:bg-primary/10 bg-primary/15 blur-[100px]" />
               </div>
 
               {/* Content */}
@@ -205,19 +202,19 @@ export default function ExperiencePage() {
                 </span>
 
                 {/* Title */}
-                <h2 className="mt-6 text-3xl lg:text-4xl font-bold leading-tight">
+                <h2 className="mt-6 text-3xl lg:text-4xl font-bold leading-tight dark:text-white">
                   {selected.title}
                 </h2>
 
                 <p className="mt-2 text-lg text-primary">@{selected.company}</p>
 
                 {/* Location */}
-                <div className="mt-6 flex items-center gap-2 text-sm text-gray-500">
+                <div className="mt-6 flex items-center gap-2 text-sm text-muted-foreground">
                   <span>Karawang, Indonesia</span>
                 </div>
 
                 {/* Divider */}
-                <div className="my-8 h-px bg-gradient-to-r from-primary/40 via-white/10 to-transparent" />
+                <div className="my-8 h-px bg-linear-to-r dark:from-primary/40 from-primary/80 via-white/10 to-transparent" />
 
                 {/* Description */}
                 <ul className="space-y-4">
@@ -225,7 +222,7 @@ export default function ExperiencePage() {
                     <li key={index} className="flex gap-3">
                       <div className="mt-2 h-2 w-2 shrink-0 rounded-full bg-primary" />
 
-                      <span className="text-base leading-8 text-gray-400">
+                      <span className="text-base leading-8 text-muted-foreground">
                         {item}
                       </span>
                     </li>
@@ -239,11 +236,12 @@ export default function ExperiencePage() {
                       key={skill}
                       className="
               rounded-full
-              border border-white/10
-              bg-white/5
+              border dark:border-white/10 border-border/10
+              dark:bg-white/5
+              bg-foreground
               px-4 py-2
               text-xs
-              text-gray-300
+              text-muted-foreground
               transition-all
               duration-300
               hover:border-primary/40

@@ -6,9 +6,9 @@ import FutureFund from "../assets/project/Future-Fund-Transparant.png";
 import IIH from "../assets/project/IIH-Transparant.png";
 import Flexdrop from "../assets/project/Flexdrop.png";
 import Flexdrop1 from "../assets/project/Flexdrop1.png";
-
 import KakakuManis from "../assets/project/Kakaku-Manis.png";
 import Design from "../assets/project/design.png";
+import GameConsole from "../assets/project/GameConsole.png";
 
 export const projects = [
   {
@@ -16,7 +16,7 @@ export const projects = [
     category: "UI / UX",
     title: "Future Fund",
     description:
-      "Future Fund is a modern financial management website designed in Figma with a focus on clean interface and user experience.",
+      "An AI and Open Banking-powered proactive financial management app designed to help university students and young people achieve their financial goals.",
     image: FutureFund,
     github: "",
     demo: "https://www.figma.com/proto/xxxxxxxx",
@@ -27,7 +27,7 @@ export const projects = [
     category: "UI / UX",
     title: "Innovate Indonesia Hub",
     description:
-      "Platform ini berfungsi sebagai jembatan digital untuk menghubungkan industri, akademisi, dan pemerintah guna mempercepat kolaborasi dan hilirisasi riset.",
+      "This application serves as a digital bridge connecting industry, academia, and government to accelerate collaboration and the downstreaming of research.",
     image: IIH,
     github: "",
     demo: "https://www.figma.com/proto/yyyyyyyy",
@@ -38,7 +38,7 @@ export const projects = [
     category: "Website",
     title: "Flexdrop",
     description:
-      "A responsive website built with React and Tailwind CSS featuring a modern interface and smooth interactions.",
+      "A responsive e-commerce platform designed for buying and selling second-hand products, enabling users to browse listings, discover affordable items, and connect with sellers through a simple and intuitive shopping experience.",
     image: Flexdrop1,
     github: "",
     demo: "https://flexdrop.infinityfree.io/",
@@ -49,7 +49,7 @@ export const projects = [
     category: "Website",
     title: "Kakaku Manis",
     description:
-      "A responsive website built with React and Tailwind CSS featuring a modern interface and smooth interactions.",
+      "A responsive e-menu website designed for a dessert shop, allowing customers to explore cakes, pastries, beverages, and featured menu items through a clean and intuitive interface.",
     image: KakakuManis,
     github: "",
     demo: "https://emenu.free.nf/auth/login.php",
@@ -58,13 +58,24 @@ export const projects = [
   {
     id: 5,
     category: "Design",
-    title: "Kakaku Manis",
+    title: "MeSign",
     description:
-      "A responsive website built with React and Tailwind CSS featuring a modern interface and smooth interactions.",
+      "A place to showcase the results of my editing skills, such as design, video editing, and photo color grading.",
     image: Design,
     github: "",
     demo: "https://drive.google.com/drive/folders/1NO6R8dmzFMZCOfewl-Z-d1NcFWN9YiVr?usp=sharing",
-    tech: ["Canva", "Figma", "Alight Motion"],
+    tech: ["Canva", "Figma", "Alight Motion", "Capcut"],
+  },
+  {
+    id: 6,
+    category: "Dekstop App",
+    title: "Rental",
+    description:
+      "A place to showcase the results of my editing skills, such as design, video editing, and photo color grading.",
+    image: GameConsole,
+    github: "https://github.com/faturrahmanxo/GUI-Sistem-PenyewaanGameConsole",
+    demo: "",
+    tech: ["Java", "MySQL", "JavaFX", "JDBC"],
   },
 ];
 
@@ -72,10 +83,10 @@ export default function ProjectCard({ project, index }) {
   const isReverse = index % 2 !== 0;
 
   const actionText =
-    project.category === "Website"
+    project.category === "Website" || project.category === "Dekstop App"
       ? "Live Demo"
       : project.category === "UI / UX"
-        ? "Live Prototype"
+        ? "View Prototype"
         : "View Design";
 
   return (
@@ -86,9 +97,9 @@ export default function ProjectCard({ project, index }) {
       transition={{ duration: 0.7 }}
       className="relative"
     >
-      <div className="overflow-hidden rounded-3xl border border-white/10 bg-[#0B1120]/90 backdrop-blur-xl">
+      <div className="overflow-hidden rounded-3xl border border-border/10 dark:border-border/50 dark:bg-[#0B1120]/90 bg-white/70 shadow-md backdrop-blur-xl">
         {/* Window Header */}
-        <div className="flex items-center justify-between border-b border-white/10 px-6 py-4">
+        <div className="flex items-center justify-between border-b dark:border-border/50 border-border/10 px-6 py-4">
           <div className="flex items-center gap-2">
             <span className="h-3 w-3 rounded-full bg-red-500" />
             <span className="h-3 w-3 rounded-full bg-yellow-500" />
@@ -108,15 +119,17 @@ export default function ProjectCard({ project, index }) {
               </a>
             )}
 
-            <a
-              href={project.demo}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 rounded-lg border border-cyan-400/40 bg-cyan-500/10 px-4 py-2 text-sm text-cyan-300 transition-all duration-300 hover:bg-primary hover:text-white"
-            >
-              <FaArrowUpRightFromSquare size={14} />
-              {actionText}
-            </a>
+            {project.demo && (
+              <a
+                href={project.demo}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 rounded-lg border border-primary/40 bg-primary/10 px-4 py-2 text-sm text-primary transition-all duration-300 hover:bg-primary hover:text-white"
+              >
+                <FaArrowUpRightFromSquare size={14} />
+                {actionText}
+              </a>
+            )}
           </div>
         </div>
 
@@ -127,18 +140,18 @@ export default function ProjectCard({ project, index }) {
         >
           <div className={isReverse ? "lg:text-right" : ""}>
             <div className="mb-5 flex items-center gap-3">
-              <span className="rounded-full border border-cyan-400/20 bg-cyan-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-cyan-300">
+              <span className="rounded-full border border-primary/40 bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-cyan-300">
                 {project.category}
               </span>
 
-              <span className="h-px flex-1 bg-linear-to-r from-cyan-400/30 to-transparent" />
+              <span className="h-px flex-1 bg-linear-to-r from-primary/30 to-transparent" />
             </div>
 
-            <h2 className="mb-6 text-3xl font-bold text-white lg:text-5xl">
+            <h2 className="mb-6 text-3xl font-bold text-black dark:text-white lg:text-5xl">
               {project.title}
             </h2>
 
-            <p className="leading-8 text-gray-400">{project.description}</p>
+            <p className="leading-8 text-muted-foreground">{project.description}</p>
 
             <div
               className={`mt-8 flex flex-wrap gap-3 ${
@@ -148,7 +161,7 @@ export default function ProjectCard({ project, index }) {
               {project.tech.map((item) => (
                 <span
                   key={item}
-                  className="rounded-md border border-white/10 bg-white/5 px-3 py-2 text-xs font-medium text-gray-300"
+                  className="rounded-md border border-border/10 dark:bg-white/5 bg-black/5 px-3 py-2 text-xs font-medium text-muted-foreground"
                 >
                   {item}
                 </span>
@@ -157,7 +170,7 @@ export default function ProjectCard({ project, index }) {
           </div>
 
           <div className="flex justify-center">
-            <div className="w-full rounded-2xl border border-white/10 bg-[#111827] p-5 shadow-2xl">
+            <div className="w-full rounded-2xl border dark:border-white/10 border-border/10 dark:bg-[#111827] bg-muted-foreground/10 p-5 dark:shadow-2xl">
               <img
                 src={project.image}
                 alt={project.title}
