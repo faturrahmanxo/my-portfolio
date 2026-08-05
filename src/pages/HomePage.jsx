@@ -266,7 +266,7 @@ export default function HomePage() {
               Skills &<span className="section-title-span"> Technologies</span>
             </h2>
             <p className="text-muted-foreground text-center mt-6">
-              How I turn complex problems into simple, elegant solutions.
+              Here are some of the technologies I've worked with.
             </p>
 
             {/* button skills */}
@@ -345,11 +345,12 @@ export default function HomePage() {
             </div>
 
             <h2 className="section-title">
-              My
+              Featured
               <span className="section-title-span"> Projects</span>
             </h2>
-            <p className="text-muted-foreground mt-4">
-              Here are some of the technologies I've worked with
+            <p className="text-muted-foreground max-w-md mx-auto mt-4">
+              A showcase of my latest work, featuring web applications, designs,
+              and creative experiments.
             </p>
           </div>
 
@@ -407,7 +408,7 @@ export default function HomePage() {
             <div className="mt-3 w-25 h-1 mx-auto bg-linear-to-r from-blue-400 via-primary to-blue-400 rounded-full" />
 
             <p className="text-muted-foreground mt-6">
-              Here are some of the technologies I've worked with
+              How I turn complex problems into simple, elegant solutions.
             </p>
           </div>
 
