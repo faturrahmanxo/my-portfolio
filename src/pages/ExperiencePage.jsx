@@ -16,54 +16,98 @@ const experiences = [
     company: "HIMSIKA",
     period: "2025 - Present",
     description: [
-      "Assist in coordinating the Media Department to ensure smooth collaboration and task execution.",
-      "Contribute to the management and maintenance of the organization's official website.",
-      "Support the planning and publication of social media content to strengthen the organization's online presence.",
-      "Assist in event documentation and the creation of visual branding materials for organizational activities.",
+      "Improved the organization's digital presence by managing website updates and supporting consistent social media publication.",
+      "Coordinated media team activities to ensure design, documentation, and publication tasks were completed on schedule.",
+      "Collaborated with committee members using effective communication, task planning, and content management workflows.",
     ],
     skills: [
       "Communication",
-      "Website",
+      "Website Management",
+      "Content Management",
       "Design",
       "Documentation",
       "Team Coordination",
     ],
   },
+
   {
     id: 2,
+    title: "Publication, Documentation & Decoration",
+    company: "EDUFAIR 2026",
+    period: "Committee",
+    description: [
+      "Produced promotional materials that supported event awareness before the program.",
+      "Maintained organized documentation and media archives throughout the event lifecycle.",
+      "Executed event documentation and publication by collaborating with the committee and following the event timeline.",
+    ],
+    skills: [
+      "Graphic Design",
+      "Documentation",
+      "Visual Branding",
+      "Communication",
+    ],
+  },
+
+  {
+    id: 3,
     title: "Publication, Documentation & Decoration",
     company: "FCUP 2025",
     period: "Committee",
     description: [
-      "Designed promotional media before the event.",
-      "Managed documentation archives until the event concludes.",
-      "Handled event documentation and publicity.",
+      "Designed promotional assets to increase participant engagement before the competition.",
+      "Captured and organized event documentation for publication and future organizational archives.",
+      "Supported publicity activities by creating visual content and coordinating with the event committee.",
     ],
-    skills: ["Design", "Communication", "Documentation"],
+    skills: [
+      "Graphic Design",
+      "Documentation",
+      "Communication",
+      "Visual Branding",
+    ],
   },
+
   {
-    id: 3,
+    id: 4,
     title: "Publication, Documentation & Decoration",
     company: "DORAA 2025",
     period: "Committee",
     description: [
-      "Designed promotional media before the event.",
-      "Managed documentation archives until the event concludes.",
-      "Handled event documentation and publicity.",
+      "Developed promotional designs that strengthened the event's visual identity.",
+      "Managed photo and video documentation to ensure complete and organized event records.",
+      "Worked closely with committee members to deliver publication materials before and during the event.",
     ],
-    skills: ["Design", "Communication", "Documentation"],
+    skills: ["Graphic Design", "Documentation", "Communication", "Teamwork"],
   },
+
   {
-    id: 4,
+    id: 5,
+    title: "Publication, Documentation & Decoration",
+    company: "REVOIST 5.0",
+    period: "Committee",
+    description: [
+      "Created promotional media to support event marketing and participant outreach.",
+      "Documented key event activities and maintained structured media archives.",
+      "Collaborated with the publication team to ensure consistent branding across event materials.",
+    ],
+    skills: ["Graphic Design", "Documentation", "Branding", "Communication"],
+  },
+
+  {
+    id: 6,
     title: "Moderator",
     company: "SIM 2025",
     period: "Committee",
     description: [
-      "Moderated seminar sessions professionally.",
-      "Coordinated speakers and event committee.",
-      "Maintained audience interaction throughout the seminar.",
+      "Facilitated seminar sessions to ensure smooth communication between speakers and participants.",
+      "Maintained audience engagement throughout the event by managing discussions and question sessions.",
+      "Prepared event flow and coordinated with speakers and committee members to ensure the program ran according to schedule.",
     ],
-    skills: ["Public Speaking", "Communication", "Leadership"],
+    skills: [
+      "Public Speaking",
+      "Leadership",
+      "Communication",
+      "Event Coordination",
+    ],
   },
 ];
 
@@ -77,7 +121,7 @@ export default function ExperiencePage() {
       id="experience"
       className="relative min-h-screen py-24 font-primary dark:bg-slate-950 bg-white"
     >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Title */}
         <div className="mb-10" data-aos="fade-up" data-aos-duration="1000">
           <h3 className="text-4xl sm:text-5xl font-bold font-title flex items-center gap-3 bg-linear-to-r from-blue-400 via-primary to-blue-400 bg-clip-text text-transparent">
@@ -206,10 +250,12 @@ export default function ExperiencePage() {
                   {selected.title}
                 </h2>
 
-                <p className="mt-2 text-lg text-primary">@{selected.company}</p>
+                <p className="mt-2 text-lg text-primary font-semibold line-clamp-1">
+                  {selected.company}
+                </p>
 
                 {/* Location */}
-                <div className="mt-6 flex items-center gap-2 text-sm text-muted-foreground">
+                <div className="mt-4 flex items-center gap-2 text-sm text-muted-foreground">
                   <span>Karawang, Indonesia</span>
                 </div>
 
@@ -222,7 +268,7 @@ export default function ExperiencePage() {
                     <li key={index} className="flex gap-3">
                       <div className="mt-2 h-2 w-2 shrink-0 rounded-full bg-primary" />
 
-                      <span className="text-base leading-8 text-muted-foreground">
+                      <span className="text-base leading-6 dark:text-muted-foreground text-slate-600">
                         {item}
                       </span>
                     </li>
@@ -230,28 +276,29 @@ export default function ExperiencePage() {
                 </ul>
 
                 {/* Skills */}
-                <div className="mt-8 flex flex-wrap gap-2">
-                  {selected.skills.map((skill) => (
-                    <span
-                      key={skill}
-                      className="
+                <div className="mt-8">
+                  <h4 className="font-title text-xs  uppercase tracking-[0.2em] text-muted-foreground mb-4">
+                    Skills
+                  </h4>
+                  <div className="flex flex-wrap gap-1.5">
+                    {selected.skills.map((skill) => (
+                      <span
+                        key={skill}
+                        className="
               rounded-full
-              border dark:border-white/10 border-border/10
-              dark:bg-white/5
-              bg-foreground
-              px-4 py-2
-              text-xs
-              text-muted-foreground
-              transition-all
-              duration-300
-              hover:border-primary/40
-              hover:bg-primary/10
-              hover:text-primary
+              px-2 py-1
+              text-[10px]
+              font-semibold
+              border 
+              border-primary/40
+              bg-primary/10
+              text-primary
             "
-                    >
-                      {skill}
-                    </span>
-                  ))}
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
             </motion.div>

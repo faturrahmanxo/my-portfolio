@@ -89,23 +89,48 @@ export default function Navbar({ theme, toggleTheme }) {
           </NavLink>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center gap-2 relative rounded-full p-1">
+          <div className="hidden md:flex items-center gap-2">
             {NavLinks.map((nav) => (
               <NavLink key={nav.id} to={nav.to}>
                 {({ isActive }) => (
                   <div
-                    className={`relative z-10 px-4 py-1 rounded-xl cursor-pointer transition-all duration-300 ${
-                      isActive
-                        ? "bg-linear-to-r from-blue-400 via-primary to-blue-400"
-                        : ""
-                    }`}
+                    className={`
+            relative
+            flex
+            items-center
+            justify-center
+
+            h-10
+            px-4
+
+            rounded-xl
+            cursor-pointer
+
+            transition-colors
+            duration-300
+            ease-in-out
+
+            ${
+              isActive
+                ? "bg-linear-to-r from-blue-400 via-primary to-blue-400"
+                : "hover:bg-primary/5"
+            }
+          `}
                   >
                     <span
-                      className={`transition-all duration-300 ${
-                        isActive
-                          ? "text-white font-bold"
-                          : "text-muted-foreground dark:hover:text-white hover:text-black"
-                      }`}
+                      className={`
+              text-sm
+              font-semibold
+              transition-colors
+              duration-300
+              ease-in-out
+
+              ${
+                isActive
+                  ? "text-white"
+                  : "text-muted-foreground hover:text-black dark:hover:text-white"
+              }
+            `}
                     >
                       {nav.label}
                     </span>
@@ -116,7 +141,7 @@ export default function Navbar({ theme, toggleTheme }) {
           </div>
 
           <div className="flex items-center gap-3">
-            {/* Theme Toggle */}
+            {/* Tombol Tema */}
             <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
 
             {/* Hamburger */}

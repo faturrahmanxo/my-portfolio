@@ -87,11 +87,12 @@ export default function HomePage() {
       clearInterval(scrambleInterval);
       clearTimeout(repeatTimeout);
     };
+    npm;
   }, []);
 
   return (
     <div className="font-primary dark:bg-slate-950 bg-[#f9fafb]">
-      {/* section 1 */}
+      {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center pt-16 sm:pt-20 px-4 sm:px-16 lg:px-8 overflow-hidden">
         {/* Background Grid */}
         {/* <div
@@ -257,7 +258,7 @@ export default function HomePage() {
       </section>
 
       {/* Section skills */}
-      <section className="relative py-20 sm:py-32 overflow-hidden">
+      <section className="relative py-20 overflow-hidden ">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-12" data-aos="fade-up" data-aos-duration="500">
             {/* title */}
@@ -323,6 +324,66 @@ export default function HomePage() {
             {viewMode === "card" && <SkillCard />}
             {viewMode === "list" && <SkillList />}
             {/* {viewMode === "ver2" && <SkillVer2 />} */}
+          </div>
+        </div>
+      </section>
+
+      {/* Section projects */}
+      <section className="relative py-20 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* title */}
+          <div
+            className="text-center mb-20"
+            data-aos="fade-up"
+            data-aos-duration="800"
+          >
+            <div className="relative inline-flex items-center gap-2 mb-4">
+              <Sparkle className="w-3 h-3 text-primary" />
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-primary">
+                Selected Work
+              </span>
+            </div>
+
+            <h2 className="section-title">
+              My
+              <span className="section-title-span"> Projects</span>
+            </h2>
+            <p className="text-muted-foreground mt-4">
+              Here are some of the technologies I've worked with
+            </p>
+          </div>
+
+          {/* card projects */}
+          <div className="max-w-5xl mx-auto space-y-10">
+            {projects.slice(0, 2).map((project, index) => (
+              <ProjectCard key={project.id} project={project} index={index} />
+            ))}
+          </div>
+          {/* button see more */}
+          <div className="mt-14 flex justify-center">
+            <Link
+              to="/projects"
+              className="group inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-8 py-3 transition-all duration-300 hover:border-primary hover:shadow-lg hover:shadow-primary/20 hover:-translate-y-1"
+            >
+              <span className="tracking-wider uppercase text-[10px] font-bold text-muted-foreground dark:text-white">
+                View All Projects
+              </span>
+
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-3 w-3 text-muted-foreground dark:text-white transition-transform duration-300 group-hover:-rotate-25"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </Link>
           </div>
         </div>
       </section>
@@ -438,58 +499,6 @@ export default function HomePage() {
                 for the best possible experience.
               </p>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="relative py-20 sm:py-32 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* title */}
-          <div
-            className="text-center mb-20"
-            data-aos="fade-up"
-            data-aos-duration="800"
-          >
-            <h2 className="section-title">
-              My
-              <span className="section-title-span"> Projects</span>
-            </h2>
-            <p className="text-muted-foreground mt-6 ">
-              Here are some of the technologies I've worked with
-            </p>
-          </div>
-
-          {/* card projects */}
-          <div className="max-w-5xl mx-auto space-y-10">
-            {projects.slice(0, 2).map((project, index) => (
-              <ProjectCard key={project.id} project={project} index={index} />
-            ))}
-          </div>
-          {/* button see more */}
-          <div className="mt-14 flex justify-center">
-            <Link
-              to="/projects"
-              className="group inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-8 py-3 transition-all duration-300 hover:border-primary hover:shadow-lg hover:shadow-primary/20 hover:-translate-y-1"
-            >
-              <span className="tracking-wider uppercase text-[10px] font-bold text-muted-foreground dark:text-white">
-                View All Projects
-              </span>
-
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-3 w-3 text-muted-foreground dark:text-white transition-transform duration-300 group-hover:-rotate-25"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
-            </Link>
           </div>
         </div>
       </section>
